@@ -2,10 +2,6 @@
 
 A secure password manager web application with Two-Factor Authentication (2FA) using Duo Security.
 
-## ⚠️ Security Notice
-
-This application handles sensitive user data. Please follow all security guidelines in this README before deployment.
-
 ## Features
 
 - 🔐 Secure password storage with encryption
@@ -123,41 +119,12 @@ This creates a `key.key` file used for encrypting stored passwords. **NEVER comm
 
 ## Running the Application
 
-### Development Mode
-
-```bash
-# Set DEBUG=True in .env for development
-python main.py
-```
-
-### Production Mode
-
-For production deployment, use a production ASGI server like Hypercorn:
-
-```bash
-# Install Hypercorn
-pip install hypercorn
-
-# Run with Hypercorn
-hypercorn main:app --bind 0.0.0.0:8000
-```
-
 **Important for Production:**
 - Set `DEBUG=False` in your `.env` file
 - Use HTTPS (the app requires it for secure cookies)
 - Set up proper firewall rules
 - Use a reverse proxy (nginx, Apache)
 - Keep all dependencies updated
-
-## Security Best Practices
-
-### Files to NEVER Commit
-
-The `.gitignore` file is configured to exclude:
-- `.env` - Contains all sensitive credentials
-- `key.key` - Encryption key for passwords
-- `static/duo_qr/*.png` - User-specific QR codes
-- `__pycache__/` and other Python artifacts
 
 ### Password Security
 
@@ -207,15 +174,6 @@ PasswordManager/
 4. **Add Passwords**: Store passwords for various services
 5. **View Passwords**: Access your encrypted passwords
 
-## Contributing
-
-When contributing to this repository:
-
-1. Never commit sensitive data (credentials, keys, etc.)
-2. Test all security features before submitting PRs
-3. Follow Python PEP 8 style guidelines
-4. Update documentation for any new features
-
 ## Troubleshooting
 
 ### Database Connection Failed
@@ -231,25 +189,4 @@ When contributing to this repository:
 ### Encryption Key Not Found
 - Run `python key.py` to generate the key
 - Ensure `key.key` exists in the project root
-
-## License
-
-This project is for educational purposes. Please ensure compliance with all applicable laws and regulations when deploying.
-
-## Important Notes
-
-⚠️ **Before Making This Repository Public:**
-
-1. ✅ Ensure `.env` is in `.gitignore` and NOT committed
-2. ✅ Ensure `key.key` is in `.gitignore` and NOT committed
-3. ✅ Remove any generated QR codes from git history
-4. ✅ Verify no sensitive data in commit history
-5. ✅ Create `.env.example` with placeholder values
-6. ✅ Review all code for hardcoded secrets
-7. ✅ Test the application with environment variables
-8. ✅ Update this README with your specific deployment details
-
-## Support
-
-For issues or questions, please open an issue on GitHub.
 
