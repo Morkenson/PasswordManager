@@ -1,0 +1,61 @@
+# Environment variables and secrets
+.env
+*.key
+key.key
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.pyc
+
+# Virtual environment
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Build and distribution
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Generated QR codes (user-specific data)
+static/duo_qr/*.png
+!static/duo_qr/.gitkeep
+
+# Visual Studio / MSBuild
+obj/
+bin/
+*.pyproj.user
+*.suo
+*.user
+*.cache
+
+# Database files (if using SQLite)
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs
+*.log
+
+# Operating System
+Thumbs.db
+

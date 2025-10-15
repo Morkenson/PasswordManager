@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QR Code Activation</title>
+</head>
+<body>
+    <h1>Scan this QR code with your Duo Mobile app</h1>
+    <img src="{{ url_for('static', filename='duo_qr/' + username + '_duo_qr.png') }}" alt="Duo QR Code">
+
+    <p>Once you have scanned the QR code and completed the setup, you can proceed to the login page.</p>
+    <a href="{{ url_for('login') }}">
+        <button type="button">Go to Login</button>
+    </a>
+</body>
+</html>

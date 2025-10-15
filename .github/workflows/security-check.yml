@@ -1,0 +1,61 @@
+# GitHub Actions workflow for security checks
+# This runs automatically on every push and pull request
+
+name: Security Checks
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install safety bandit
+    
+    - name: Check for known security vulnerabilities
+      run: |
+        pip install -r requirements.txt
+        safety check --json || true
+    
+    - name: Run Bandit security linter
+      run: |
+        bandit -r . -x ./env,./venv -f json || true
+    
+    - name: Check for .env file (should not exist in repo)
+      run: |
+        if [ -f .env ]; then
+          echo "ERROR: .env file found in repository!"
+          exit 1
+        fi
+        echo ".env file not found (good)"
+    
+    - name: Check for key.key file (should not exist in repo)
+      run: |
+        if [ -f key.key ]; then
+          echo "ERROR: key.key file found in repository!"
+          exit 1
+        fi
+        echo "key.key file not found (good)"
+    
+    - name: Verify .gitignore exists
+      run: |
+        if [ ! -f .gitignore ]; then
+          echo "ERROR: .gitignore file is missing!"
+          exit 1
+        fi
+        echo ".gitignore file found (good)"
+

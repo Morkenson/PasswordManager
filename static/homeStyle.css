@@ -1,0 +1,58 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('../static/logoBig.png');
+    background-size: 650px 725px;
+    background-position: top center; /* Place image top */
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
+    /* Remove vertical centering */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Only center horizontally */
+    background-color: white;
+}
+
+.title {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 38px;
+    font-weight: bold;
+    color: white;
+    margin: 0;
+    text-align: center;
+    white-space: nowrap;
+    font-family: Monsterrat; /* Prevent the text from wrapping */
+}
+
+.container {
+    width: 350px;
+    height: 125px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    /* Push the container down below the image area */
+    margin-top: 500px; /* Adjust this so container sits below the image */
+}
+
+button {
+    background-color: #0073aa;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    margin: 10px 0;
+    transition: background-color 0.3s;
+}
+
+    button:hover {
+        background-color: #005177;
+    }

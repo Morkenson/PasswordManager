@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Cyberia Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboardStyle.css') }}">
+</head>
+<body>
+    <!-- Dashboard Container -->
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2>Dashboard</h2>
+            <ul>
+                <li><a href="#" data-url="{{ url_for('view_password') }}" onclick="loadContentFromData(this)">View Passwords</a></li>
+                <li><a href="#" data-url="{{ url_for('add_password') }}" onclick="loadContentFromData(this)">Add Password</a></li>
+                <li><a href="#" data-url="{{ url_for('logout') }}" onclick="loadContentFromData(this)">Logout</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <div id="dynamic-content">
+                <h1>Welcome, {{ username }}</h1>
+                <p>Select an option from the sidebar to continue.</p>
+            </div>
+        </div>
+
+        <script>
+            function loadContentFromData(element) {
+                const url = element.getAttribute('data-url'); // Get the URL from the data-url attribute
+
+                if (url.includes('logout')) {
+                    window.location.href = url; // Force redirect to the logout route
+                    return;
+                }
+
+                if (url.includes('add_password')) {
+                    window.location.href = url; 
+                    return;
+                }
+
+                fetch(url) // Fetch content from the backend
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Failed to fetch content');
+                        }
+                        return response.text(); // Get the response as text (HTML)
+                    })
+                    .then(data => {
+                        document.getElementById('dynamic-content').innerHTML = data; // Replace main content
+                    })
+                    .catch(error => {
+                        console.error('Error loading content:', error);
+                        document.getElementById('dynamic-content').innerHTML = `
+                            <p style="color: red;">Error: ${error.message}</p>`;
+                    });
+            }
+        </script>
+</body>
+</html>
+
